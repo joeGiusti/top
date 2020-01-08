@@ -1,0 +1,443 @@
+﻿/*
+    make the sidenav reactive: dissipears at a certain width (for mobile)
+    maybe it goes into the topnav
+    smae with topnav items
+
+*/
+
+html {
+    height: 100%;
+    overflow-x: hidden;
+}
+body
+{
+    height:100%;
+}
+a{
+    text-decoration:none;
+}
+.topnav {
+    height: 50px;
+    background-color: #00182D;
+
+}
+.viewTile {
+    background-color: #49A942;
+    border-radius: 15px;
+    width: 60%;
+    margin-left: 20%;
+    padding: 40px;
+    font-size: 25px;
+    font-weight: 900;
+    color: #381c00;
+}
+.viewQuestionTile {
+    background-color: #2A5C99;
+    border-radius: 15px;
+
+    width: 60%;
+    margin-left: 20%;
+    padding: 30px;
+    font-size: 25px;
+    font-weight: 900;
+    color: #00182D;
+}
+
+.viewQuestionButton {
+    background-color: #00182D;
+    border-radius: 15px;
+
+    width: 90%;
+    margin-left: 5%;
+    padding: 30px;
+    font-size: 25px;
+    font-weight: 900;
+    color: #2A5C99;
+}
+.correctAnswer {
+    background-color: #8dc655;
+    color: #d7ff9e;
+}
+.wrongAnswer {
+    background-color: #600f0f;
+    color: #510000;
+}
+.overQuestion {
+    position: fixed;
+    z-index: 1;
+    margin-left: 20%;
+    margin-top: 0;
+}
+.hiddenA {
+}
+.editTile {
+    width: calc(100vw-200px);
+    margin-left: 200px;
+    border: 1px solid;
+    border-radius: 10px;
+    margin-top: 20px;
+    background-color: #01284A;
+    padding:20px;
+}
+    .editTile textarea {
+        height:200px;
+        width: 90%;
+        margin: 10px;
+        padding: 10px;
+        border-radius: 5px;
+        background-color: #2A5C99;
+        color:white;
+        font-weight:bold;
+
+    }
+.ta {
+    height: 200px;
+    width: 95%;
+    margin: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #2A5C99;
+    font-weight: bold;
+}
+.customButton {
+    border-radius: 5px;
+    color: white;
+    background-color: #01284A;
+    text-decoration: none;
+    padding: 8px;
+    padding-left: 25px;
+    padding-right: 25px;
+    margin-left: 10px;
+    margin-right:10px;
+
+}
+    .customButton:hover {
+        background-color: #2A5C99;
+    }
+    .topnav div {
+    float: right;
+    height: 100%;
+    color: darkgray;
+    padding: 10px;
+    visibility: visible;
+}
+.topnav div:hover {    
+    color: white;       
+}
+.topnav .topSide {
+    width:200px;
+    float: left;
+    text-align:center;
+    padding:10px;
+    
+}
+.userIcon{
+    position:absolute;
+    right:0;
+    top:0;
+    margin-right:20px;
+    width:50px;
+    padding:5px;    
+}
+.topnav .placeHolder {
+    float: right;
+    width: 150px;
+    padding: 5px;
+}
+.dropdown {
+
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 50px;
+    width: 200px;
+    /*
+    position:absolute;
+    top:0;
+    right:0;
+    width:200px;
+    height:50px;
+        */
+}
+    .dropdown:hover .dropdown-content2 {
+        visibility: visible;
+    }
+.hideToggle {
+    opacity:0;
+}
+.dropdown:hover .hideToggle {
+    opacity: 1;
+}
+.dropdown-content2 {
+    visibility: hidden;
+    color: white;
+    background-color: #00182D;
+    position: absolute;
+    top: 50px;
+    width: 200px;
+    text-align: center;
+    font-weight: bold;
+    opacity: 0.5;
+}
+    .dropdown-content2 div {
+        padding: 10px;
+    }
+    .dropdown-content2 div:hover {
+        background-color: #2A5C99;
+    }
+.sidenav {
+    width: 200px;
+    height: 200%;
+    position: sticky;
+    float: left;
+    background-color: #01284A;
+    color: white;
+    text-align: center;
+}
+    .sidenav a {
+        color: white;
+        display: block;
+        padding: 20px;
+        font-family: Gill Sans MT;
+        font-weight: bold;
+        text-decoration: none;
+    }
+.sidenav a:hover {
+    background-color: #2A5C99;
+}
+.sidenav .active{
+    background-color: #2A5C99;
+}
+.sidenav .backgroundImage {
+    width: 200px;
+    z-index: -1;
+    float: left;
+    position: fixed;
+    bottom: 0px;
+    left: 0;
+    
+}
+
+.mid{
+    width: 100%;
+    padding:20px;
+    text-align:center;
+}
+#welcomeDiv{
+    font-size:30px;
+    font-weight:bold;
+}
+
+.modalButton {
+    background-color: #01284A;
+    padding: 8px;
+    border-radius:5px;
+    color:white;
+    width:80px;
+}
+.pageButton {
+    background-color: #01284A;
+    padding: 8px;
+    border-radius: 5px;
+    color: white;
+}
+.pageButton:hover {
+    background-color: #2A5C99;
+}
+.left {
+    position: absolute;
+    left: 20px;
+}
+.right{
+    position: absolute;
+    right: 20px;
+}
+.modalButton:hover {
+    background-color: #2A5C99;
+}
+
+.modalContent2 {
+    border-radius: 15px;
+    background-color: #00182D;
+    width: 400px;
+    position: absolute;
+    left: calc(50% - 200px);
+    top: 20%;
+}
+.modalContent1 {
+    background-color: #00182D;
+    width: 400px;
+    position: absolute;
+    left: calc(50% - 100px);
+    top: 20%;
+}
+.infoDiv {
+    background-color: #00182D;
+    height: 300px;
+}
+.infoDiv2 {
+    background-color: #01284A;
+    height: 300px;
+}
+.bb {
+    border-bottom: 1px solid white;
+}
+.orange{
+    background-color: #ff8a65;
+}
+.infoOverlayCard {
+    position: absolute;
+    left: 5%;
+    top: 75%;
+    z-index: 2;
+    background-color: #2A5c99;
+    height: 300px;
+    width: 90%;
+    border-radius: 15px;
+    padding:25px;
+}
+.infoOverlay2 {
+    height: 300px;
+    width: 90%;
+    background-color: #2A5c99;
+    top: 120px;
+    left: 5%;
+    position: absolute;
+    border-radius: 15px;
+    padding:20px;
+}
+.infoOverlay3 {
+    height: 300px;
+    width: 90%;
+    background-color: #0018sd;
+    top: 120px;
+    left: 5%;
+    position: absolute;
+    border-radius: 15px;
+    padding: 20px;
+}
+.bigCard {
+    height: auto;
+    width: 90%;
+    background-color: #2A5c99;
+    top: 120px;
+    left: 5%;
+    position: absolute;
+    border-radius: 15px;
+    padding: 20px;
+}
+.smallCard {
+    height: 350px;
+    width: 400px;
+    position: relative;
+    display: inline-block;
+    margin: 25px;
+    margin-top: 0;
+    background-color: #00182d;
+    border-radius: 15px;
+    padding: 20px;
+    vertical-align: top;
+}
+.smallCardText {
+    color: white;
+    font-size: 15px;
+    text-align: center;
+    padding: 25px;
+    padding-top:15px;
+}
+.videoCard {
+    height: 350px;
+    width: 400px;
+    position: relative;
+    display: inline-block;
+    margin: 25px;
+    margin-top: 0;
+    background-color: #00182d;
+    border-radius: 15px;
+    vertical-align: top;
+}
+@media screen and (max-width:950px){
+    .videoCard {
+        width: 80%;
+        height:35vw;
+        margin-left: 10%;
+    }
+}
+@media screen and (min-width:950px){
+    .videoCard {
+        width: 40%;
+        height: 20vw;
+        margin-left: 5%;
+    }
+}
+.link{
+    color:white;
+    font-size:15px;
+    font-weight:bold;
+
+
+}
+.link:visited {
+    color: #f57e42;
+}
+.topLabel {
+    color: white;
+    font-size: 5vw;
+    font-weight: bold;
+}
+
+@media screen and (max-width:950px) {
+    .smallCard {
+        width: 90%;
+        margin-left: 5%;
+
+    }
+}
+
+@media (min-width:950px) and (max-width:1065px) {
+    .smallCard {
+        width: 40%;
+        margin-left: 3%;
+
+    }
+}
+
+@media (min-width:1065px) and (max-width:1400px) {
+    .smallCard {
+        width: 40%;
+        margin-left:5%;
+    }
+}
+@media screen and (min-width:1400px){
+    .smallCard {
+        width: 29%;
+        margin-left: 2%;
+    }
+}
+.topLabelContainer {
+    border-radius: 15px;
+    height: 150px;
+    width: 45%;
+    position: absolute;
+    top: 20%;
+    left: 10%;
+}
+
+
+@media screen and (max-width:1200px) {
+    .topLabel {
+        font-size: 60px;
+
+    }
+}
+    @media screen and (max-width:580px) {
+
+        .topLabelContainer {
+            width: 100%;
+            left: 0;
+        }
+        .topLabel {
+            text-align: center;
+            margin-left: 0%;
+        }
+    }

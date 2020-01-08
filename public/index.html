@@ -1,0 +1,484 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="StyleSheetUCF.css" />
+
+    <script scr="script.js"></script>
+    <!-- firebase setup scripts -->
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.2.1/firebase-app.js"></script>
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+    <--https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/7.2.1/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.2.1/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.2.1/firebase-auth.js"></script>
+
+    <script>
+        var firebaseConfig = {
+            apiKey: "AIzaSyDsTg4EJafxi4Y60ozzP7BQiOm-036UrDo",
+            authDomain: "unity-test-29bde.firebaseapp.com",
+            databaseURL: "https://unity-test-29bde.firebaseio.com",
+            projectId: "unity-test-29bde",
+            storageBucket: "unity-test-29bde.appspot.com",
+            messagingSenderId: "323632391835",
+            appId: "1:323632391835:web:8d5a202336c41b319b483e",
+            measurementId: "G-YMJME22WL0"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        firebase.analytics();
+    </script>
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="loginCloneStyles1.css">
+
+
+    <link rel="icon" href="torch2Icon.png" />
+    <title>TOP University</title>
+</head>
+<body style="height:100%; background-color: #00182D;">
+
+
+    <!-- topnav -->
+    <div class="topnav" style="position:absolute; opacity:0.5; width:100%; background-color: #00182D;">
+        <!-- user account dropdown
+        <div class="dropdown">
+            <img class="userIcon" src="userIcon.png">
+            <div class="dropdown-content" style="position:absolute; margin-top:50px; right:-10;">
+                <div id="accountButton">Account</div><br id="toggle" />
+                <div id="signoutButton">Logout</div><br id="toggle2" />
+                <div id="signinButton" data-toggle="modal" data-target="#signInModal">Sign In</div><br />
+                <div id="signupButton" data-toggle="modal" data-target="#signUpModal">Sign Up</div><br />
+                <div id="anonButton">Anonomous</div>
+            </div>
+        </div>
+        -->
+        <div class="topSide">TOP</div>
+    </div>
+    <div class="dropdown" style="position:absolute; top:0; right:0; height:50px; width:200px;">
+        <img class="userIcon" src="userIcon.png" style="height:50px; position:absolute; right:10px;">
+        <div id="ddc" class="dropdown-content2" style="">
+            <div class="hideToggle" id="homeButton">Home</div>
+            <div class="hideToggle" id="accountButton">Account</div>
+            <div class="hideToggle" id="signoutButton">Logout</div>
+            <div class="hideToggle" id="signinButton" data-toggle="modal" data-target="#signInModal">Sign In</div>
+            <div class="hideToggle" id="signupButton" data-toggle="modal" data-target="#signUpModal">Sign Up</div>
+            <div class="hideToggle" id="anonButton">Anonomous</div>
+            <!-- <div id="googleSignUp">google signup</div> -->
+        </div>
+    </div>
+    <!-- <div id="testDataButton" style="position:absolute; z-index:2000;">testData</div> -->
+    <!-- login, signup popup -->
+    <!-- Sign In Modal -->
+    <div class="modal fade" id="signInModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="height:100%;">
+        <div class="modal-dialog" role="document" style="height:100%; ">
+            <div class="modal-content modalContent2" style="top: 30%; background-color:#00182D; border-radius:15px;">
+                <div class="modal-header" style="background-color:#00182D;">
+                    <p style="text-align:center; color:white; font-size:20px; font-weight:bold; width:100%;">
+                        User Login
+                    </p>
+                </div>
+                <form id="signInForm" class="modal-body">
+                    <input id="signInEmailInput" autocomplete="off" class="input100" type="text" name="username" placeholder="User" style="color:white;">
+                    <input id="signInPassInput" autocomplete="off" class="input100" type="password" name="username" placeholder="Pass" style="color:white;">
+                    <p id="signinErrorView" style="color:red; text-align:center; font-size:15px; font-weight:bold;"></p>
+                    <div class="modal-footer" style="height:80px; background-color:#00182D;">
+                        <button type="button" class="modalButton left" data-dismiss="modal">Cancel</button>
+                        <input id="submitLogin" class="modalButton right" type="submit" value="Sign In">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- Sign Up Modal -->
+    <div class="modal fade" id="signUpModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="height:100%;">
+        <div class="modal-dialog" role="document" style="height:100%;">
+            <div class="modal-content modalContent2" style="top: 30%; background-color:#00182D; border-radius:15px;">
+                <div class="modal-header" style="background-color:#00182D;">
+                    <p style="text-align:center; color:white; font-size:20px; font-weight:bold; width:100%;">
+                        New User
+                    </p>
+                </div>
+                <div class="modal-body" style="background-color:#00182D;">
+                    <input id="signUpNameInput" autocomplete="off" class="input100" type="text" name="username" placeholder="Login Name" style="color:white;">
+                    <input id="signUpPassInput" autocomplete="off" class="input100" type="text" name="username" placeholder="Password" style="color:white;">
+                    <div style="border-bottom: solid 1px white; height:30px;"></div>
+                    <p style="color:white; font-size:15px; text-align:center; font-weight:bold; padding:10px;">
+                        * Optional *
+                    </p>
+                    <input id="signUpEmailInput" autocomplete="off" class="input100" type="text" name="username" placeholder="Email (for recovery)" style="color:white;">
+                    <input id="signUpSidInput" autocomplete="off" class="input100" type="text" name="username" placeholder="Student ID" style="color:white;">
+                </div>
+                <div class="modal-footer" style="height:80px; background-color:#00182D;">
+                    <button type="button" class="modalButton left" data-dismiss="modal">Cancel</button>
+                    <button id="submitSignUp" type="button" class="modalButton right">Sign Up</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- vid seciton -->
+    <div>
+        <div class="header-media-fullscreen">
+            <video id="a" class="hidden-xs-down media-background media-background-video object-fit-cover" autoplay muted loop>
+                <source src="images/miscBloodCells.mp4" type="video/mp4">
+            </video>
+        </div>
+        <div class="topLabelContainer">
+            <p class="topLabel">Tusch ot Promfiehus </p>
+        </div>
+    </div>
+    <!-- info seciton
+    <div class="infoOverlayCard">
+
+    </div>
+
+    <div class="infoDiv bb" style="height:50px;"></div>
+    <div class="infoDiv2 bb" style="height:200px;"></div>
+    <div class="infoDiv bb"></div>
+    <div class="infoDiv2 bb"></div>
+    <div class="infoDiv"></div>
+    -->
+    <!-- more info sections -->
+    <div style="position: absolute; height:100%; width:100%; background-color: #00182D; top:90%;">
+        <p style="color:white; font-weight:bold; font-size:20px; text-align:center; padding:35px;">More Info &darr;</p>
+        <div class="bigCard">
+            <!-- info cards -->
+            <div class="smallCard">
+                <p style="color:white; font-size:30px; font-weight:bold; text-align:center;">Attention economy</p>
+                <p class="smallCardText">
+                    Some of the smartest minds in the world are working hard to hijack the reward centers of the brain.
+                    Platforms that can gain and hold a users attention are very profitable.
+                    <!--This creates an economy based on gaining and holding the attention of users.
+                    The stratigies that are used to accomplich this in a flooded and competitive market have become very advanced.-->
+                    This changes the way the mind works, anything without instant reward seems like a grueling chore.
+                    Fostering excitement about traditional academics is an up-hill battle.
+                </p>
+            </div>
+            <div class="smallCard">
+                <p style="color:white; font-size:30px; font-weight:bold; text-align:center;">Get Started</p>
+                <p class="smallCardText">
+                    In the top right there is a user icon. You can log in instantly
+                    and anonomously without creating an accont by clicking
+                    anonomous<span style="font-weight:bold;">,</span> but creating an account requires no personal
+                    info, enables many key features, and will save your progress.
+                </p>
+            </div>
+            <div class="smallCard">
+                <p style="color:white; font-size:30px; font-weight:bold; text-align:center;">Persuasive technology</p>
+                <p class="smallCardText">
+                    The term persuasive technology describes the methods used by platforms like instagram and fortnight
+                    to make them addictive and hold users attention. We seek to migrate these technologies to education.
+                </p>
+            </div>
+            <div class="smallCard">
+                <p style="color:white; font-size:30px; font-weight:bold; text-align:center;">Game Theory</p>
+                <p class="smallCardText">
+                    Points are rewarded for success and failure does not have any effect.
+                    Points are always visible and a special sound plays when points are rewarded.
+                    They are used as a comparitive rank in the class as well as helping students earn a grade for initial value like the gold standard.
+                    Over time they will take on inherent value like the dollar.
+                </p>
+            </div>
+            <div class="smallCard">
+                <p style="color:white; font-size:30px; font-weight:bold; text-align:center;">Backed by Research</p>
+                <p class="smallCardText">
+                    Stratigies are inspired by analysis of the most successful platforms on the market as well as academic redearch. Sources and videos are listed below.
+                </p>
+            </div>
+            <div class="smallCard">
+                <p style="color:white; font-size:30px; font-weight:bold; text-align:center;">Social Integration</p>
+                <p class="smallCardText">
+                    Questions are used in games that students play with eachother via the app.
+                    These games can be played 1v1 or on teams, the winner earns class points.
+                    Knowing the material gains social relivance when the team depends on a single student.
+                    It also provides a sense of being important to peers.
+                    Optional point ranking next to peers is another strong social motivator.
+                </p>
+            </div>
+            <!-- videos and links -->
+            <div class="smallCard" style="width:95%; height:75vw">
+                <p style="color:white; font-size:30px; font-weight:bold; text-align:center; padding-bottom:20px;">Videos</p>
+                <iframe class="videoCard" src="https://www.youtube.com/embed/W6CBb3yX9Zs?start=45&end=88" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <iframe class="videoCard" src="https://www.youtube.com/embed/awAMTQZmvPE" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <iframe class="videoCard" src="https://www.youtube.com/embed/NUMa0QkPzns" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <iframe class="videoCard" src="https://www.youtube.com/embed/Z1y-VcZ3JB8?start=109" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+                <p style="color:white; font-size:30px; font-weight:bold; text-align:center; padding-bottom:20px;">Links</p>
+
+                <!-- links 1 -->
+                <div class="videoCard" style="padding:45px; height:auto;">
+                    <a class="link" target="_blank" href="https://captology.stanford.edu/">Stanford Persuasive Tech Lab Site</a> <br />
+                    <a class="link" target="_blank" href="https://www.vox.com/2018/8/8/17664580/persuasive-technology-psychology">Vox article</a> <br />
+
+
+                </div>
+                <!-- links 2 -->
+                <div class="videoCard" style="padding:45px;  height:auto;">
+
+                    <a class="link" target="_blank" href="https://www.youtube.com/watch?v=C74amJRp730">A Ted Talk by Tristan Harris</a> <br />
+                    <a class="link" target="_blank" href="https://www.wired.com/story/phone-addiction-formula/">Wired article</a> <br />
+                    <a class="link" target="_blank" href=" https://www.behaviormodel.org/">Fogg behavior model</a>
+
+                </div>
+
+            </div>
+            <div class="smallCard" style="width:95%; height:400px;">
+                <p style="color:white; font-size:30px; font-weight:bold; text-align:center;">Contact</p>
+                <p class="smallCardText">
+                    joeGx03@gmail.com <br />
+                    978-502-5620
+                </p>
+            </div>
+        </div>
+
+        <!--
+        <div class="infoOverlay2" style="width:30%;">
+            <p style="color:white; font-size:2vw; font-weight:bold; text-align:center;">Persuasive technology</p>
+            <p style="color:white; font-size:1vw; text-align:center; padding:25px;">
+                The term persuasive technology describes the methods used by things like instagram and fortnight <br />
+                to make them addictive and hold users attention. We seek to migrate these technologies to education.
+            </p>
+        </div>
+        <div class="infoOverlay2" style="top:450px;"></div>
+            -->
+    </div>
+
+    <script>
+
+        var name;
+        var classIds = [];
+        var userRef = null;
+        var goHome = false;
+        var newUser = false;
+
+        noUserButtons();
+        getAuth();
+
+        $("#signInForm").submit(function (e) {
+            e.preventDefault();
+        });
+
+        $("#accountButton").click(function () {
+            console.log("clicked accountButton");
+        });
+        $("#signoutButton").click(function () {
+            firebase.auth().signOut();
+            console.log("clicked signoutButton");
+        });
+        $("#signinButton").click(function () {
+            console.log("clicked signinButton");
+        });
+        $("#signupButton").click(function () {
+            //console.log("clicked signupButton");
+        });
+        $("#anonButton").click(function () {
+            goHome = true;
+            console.log("clicked anonButton");
+            firebase.auth().signInAnonymously().catch(function (error) {
+                // Handle Errors here.
+                var errorCode = error.code;
+                var errorMessage = error.message;
+            });
+        });
+
+        $("#testDataButton").click(function () {
+            console.log("pressed test data butotn");
+            if (userRef == null)
+                return;
+            var a = "cat";
+            var b = "hat";
+            // this is used to add an indefinite number of items because each key will be unique
+            //it is not necissary here
+            var key = userRef.push().key;
+            console.log(key);
+            firebase.database().ref().child('testData').child("testChild").set({
+                catt: b,
+                fat: "dog"
+            });
+        });
+
+
+
+        function getAuth() {
+            firebase.auth().onAuthStateChanged(function (user) {
+                if (user) {
+
+
+                    // only show the relivant buttons in the user dropdown
+                    userButtons();
+
+
+
+                    if (newUser == true) {
+                        console.log("new user created");
+                        var email = document.getElementById("signUpEmailInput").value;
+                        var name = document.getElementById("signUpNameInput").value;
+                        var displayName = document.getElementById("signUpNameInput").value;
+                        var studentId = document.getElementById("signUpSidInput").value;
+
+                        //firebase.database().ref().child('structA').child('users').child(user.uid).set({
+                        //a: b
+                        //});//  = document.getElementById("signUpEmailInput").value;
+                        //firebase.database().ref().child('structA').child('users').child(user.uid).child("name").value = document.getElementById("signUpNameInput").value;
+                        //firebase.database().ref().child('structA').child('users').child(user.uid).child("displayName").value = document.getElementById("signUpNameInput").value;
+                        //firebase.database().ref().child('structA').child('users').child(user.uid).child("studentId").value = document.getElementById("signUpSidInput").value;
+                        firebase.database().ref().child("structA").child("users").child(user.uid).set({
+                            email: email,
+                            name: name,
+                            displayName: displayName,
+                            studentId: studentId
+
+                        });
+                    }
+
+
+                    // get a ref to the user to get their id
+                    userRef = firebase.database().ref().child('structA').child('users').child(user.uid);
+                    // get the users name for the welcome bar
+                    //userRef.child("name").once("value", function (snap) { name = snap.val() });
+                    //setWelcomeBar(name);
+
+                    var isAnonymous = user.isAnonymous;
+                    if (isAnonymous == true) {
+                        console.log("loged in as anon");
+                    }
+
+                    // load the users list of class ids
+                    //loadClassesFromUser(userRef);
+
+                    if (goHome == true)
+                        window.location.href = 'home.html';
+
+                } else {
+
+                    noUserButtons();
+                }
+            });
+        }
+        function userButtons() {
+
+            document.getElementById("homeButton").style.display = "block";
+            document.getElementById("accountButton").style.display = "block";
+            document.getElementById("signoutButton").style.display = "block";
+            document.getElementById("signinButton").style.visibility = "none";
+            document.getElementById("signupButton").style.visibility = "none";
+            document.getElementById("anonButton").style.visibility = "none";
+
+            document.getElementById("homeButton").style.visibility = "visible";
+            document.getElementById("signoutButton").style.visibility = "visible";
+            document.getElementById("accountButton").style.visibility = "visible";
+            document.getElementById("signinButton").style.visibility = "hidden";
+            document.getElementById("signupButton").style.visibility = "hidden";
+            document.getElementById("anonButton").style.visibility = "hidden";
+            document.getElementById("ddc").style.height = "140px";
+            console.log("logged in");
+        }
+        function noUserButtons() {
+            //document.getElementById("signoutButton").style.position = "absolute";
+            //document.getElementById("accountButton").style.position = "absolute";
+            //document.getElementById("accountButton").innerHTML = "";
+
+            document.getElementById("homeButton").style.display = "none";
+            document.getElementById("signoutButton").style.display = "none";
+            document.getElementById("accountButton").style.display = "none";
+            document.getElementById("signinButton").style.visibility = "block";
+            document.getElementById("signupButton").style.visibility = "block";
+            document.getElementById("anonButton").style.visibility = "block";
+
+            document.getElementById("homeButton").style.visibility = "hidden";
+            document.getElementById("signoutButton").style.visibility = "hidden";
+            document.getElementById("accountButton").style.visibility = "hidden";
+            document.getElementById("signinButton").style.visibility = "visible";
+            document.getElementById("signupButton").style.visibility = "visible";
+            document.getElementById("anonButton").style.visibility = "visible";
+            document.getElementById("ddc").style.height = "140px";
+            console.log("logged out");
+        }
+        function setWelcomeBar(name) {
+            document.getElementById("welcomeBar").innerHTML = "welcome " + name;
+        }
+
+        $("#homeButton").click(function () {
+            window.location.href = "home.html";
+        });
+        //===============================================================
+        // submit the login form
+        $("#submitLogin").click(function () {
+            //console.log("two");
+            var email = document.getElementById("signInEmailInput").value;
+            var password = document.getElementById("signInPassInput").value;
+            //console.log("email: " + email);
+            //console.log("password: " + password);
+            goHome = true;
+            loginFunction(email, password);
+        });
+
+        // login funciton
+        function loginFunction(email, password) {
+            // triggers the onAuthStateChanged if successful
+            firebase.auth().signInWithEmailAndPassword(email, password).catch(function (error) {
+                console.log("failed login");
+                document.getElementById("signinErrorView").innerHTML = "Invalid";
+                document.getElementById("messageText").innerHTML = "<span><br />Invalid credentials. Please try again.<br /><br /></span>"
+                // Handle Errors here.
+                var errorCode = error.code;
+                var errorMessage = error.message;
+                // ...
+            });
+        }
+        //===============================================================
+        // submitSignUp
+        $("#submitSignUp").click(function () {
+            goHome = true;
+            newUser = true;
+            signUp(document.getElementById("signUpEmailInput").value, document.getElementById("signUpPassInput").value);
+        });
+        function signUp(email, password) {
+            firebase.auth().createUserWithEmailAndPassword(email, password).catch(function (error) {
+                // Handle Errors here.
+                var errorCode = error.code;
+                var errorMessage = error.message;
+            });
+        }
+        $("#googleSignUp").click(function () {
+            console.log("googl");
+            var provider = new firebase.auth.GoogleAuthProvider();
+            firebase.auth().signInWithPopup(provider).then(function (result) {
+                // This gives you a Google Access Token. You can use it to access the Google API.
+                var token = result.credential.accessToken;
+                // The signed-in user info.
+                var user = result.user;
+                // ...
+                goHome = true;
+            }).catch(function (error) {
+                // Handle Errors here.
+                var errorCode = error.code;
+                var errorMessage = error.message;
+                // The email of the user's account used.
+                var email = error.email;
+                // The firebase.auth.AuthCredential type that was used.
+                var credential = error.credential;
+                console.log(errorMessage);
+                // ...
+            });
+        });
+
+    </script>
+
+
+
+</body>
+</html>

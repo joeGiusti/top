@@ -1,0 +1,1473 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="styles.css" />
+
+
+    <!-- firebase setup scripts -->
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.2.1/firebase-app.js"></script>
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+    <--https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/7.2.1/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.2.1/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.2.1/firebase-auth.js"></script>
+
+    <script>
+        var firebaseConfig = {
+            apiKey: "AIzaSyDsTg4EJafxi4Y60ozzP7BQiOm-036UrDo",
+            authDomain: "unity-test-29bde.firebaseapp.com",
+            databaseURL: "https://unity-test-29bde.firebaseio.com",
+            projectId: "unity-test-29bde",
+            storageBucket: "unity-test-29bde.appspot.com",
+            messagingSenderId: "323632391835",
+            appId: "1:323632391835:web:8d5a202336c41b319b483e",
+            measurementId: "G-YMJME22WL0"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        firebase.analytics();
+    </script>
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+
+    <link rel="icon" href="torch2Icon.png" />
+    <title id="title">Home</title>
+</head>
+<body>
+
+    <!-- topnav -->
+    <div class="topnav">
+        <!-- user account dropdown
+        <object class="dropdown">
+            <img class="userIcon" src="userIcon.png">
+            <div class="dropdown-content">
+                <div id="accountButton">Account</div><br id="toggle" />
+                <div id="signoutButton">Logout</div><br id="toggle2" />
+                <div id="signinButton" data-toggle="modal" data-target="#signInModal">Sign In</div><br />
+                <div id="signupButton" data-toggle="modal" data-target="#signUpModal">Sign Up</div><br />
+                <div id="anonButton">Anonomous</div>
+            </div>
+        </object>
+        <div class="topSide">TOP</div>-->
+    </div>
+    <!-- dropdown user buttons -->
+    <div class="dropdown" style="position:absolute; top:0; right:0; height:50px; width:200px;">
+        <img class="userIcon" src="userIcon.png" style="height:50px; position:absolute; right:10px;">
+        <div id="ddc" class="dropdown-content2" style="opacity:1;">
+            <div class="hideToggle" id="homeButton">Home</div>
+            <div class="hideToggle" id="accountButton">Account</div>
+            <div class="hideToggle" id="signoutButton">Logout</div>
+            <div class="hideToggle" id="signinButton" data-toggle="modal" data-target="#signInModal">Sign In</div>
+            <div class="hideToggle" id="signupButton" data-toggle="modal" data-target="#signUpModal">Sign Up</div>
+            <div class="hideToggle" id="anonButton">Anonomous</div>
+        </div>
+    </div>
+    <!-- Sign In Modal -->
+    <div class="modal fade" id="signInModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="height:100%;">
+        <div class="modal-dialog" role="document" style="height:100%;">
+            <div class="modal-content modalContent1" style="top: 30%;">
+                <div class="modal-header">
+                    <p style="text-align:center; color:white; font-size:20px; font-weight:bold; width:100%;">
+                        User Login
+                    </p>
+                </div>
+                <div class="modal-body">
+                    <input id="signupEmailInput" autocomplete="off" class="input100" type="text" name="username" placeholder="User" style="color:white;">
+                    <input id="signupEmailInput" autocomplete="off" class="input100" type="text" name="username" placeholder="Pass" style="color:white;">
+                </div>
+                <div class="modal-footer" style="height:80px;">
+                    <button type="button" class="modalButton left" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="modalButton right">Sign In</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sign Up Modal -->
+    <div class="modal fade" id="signUpModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="height:100%;">
+        <div class="modal-dialog" role="document" style="height:100%;">
+            <div class="modal-content modalContent2">
+                <div class="modal-header">
+                    <p style="text-align:center; color:white; font-size:20px; font-weight:bold; width:100%;">
+                        New User
+                    </p>
+                </div>
+                <div class="modal-body">
+                    <input id="signupEmailInput" autocomplete="off" class="input100" type="text" name="username" placeholder="Login Name" style="color:white;">
+                    <input id="signupEmailInput" autocomplete="off" class="input100" type="text" name="username" placeholder="Password" style="color:white;">
+                    <div class="modal-header"></div>
+                    <p style="color:white; font-size:15px; text-align:center; font-weight:bold; padding:10px;">
+                        * Optional *
+                    </p>
+                    <input id="signupEmailInput" autocomplete="off" class="input100" type="text" name="username" placeholder="Email (for recovery)" style="color:white;">
+                    <input id="signupEmailInput" autocomplete="off" class="input100" type="text" name="username" placeholder="Student ID" style="color:white;">
+                </div>
+                <div class="modal-footer" style="height:80px;">
+                    <button type="button" class="modalButton left" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="modalButton right">Sign Up</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Search Class modal -->
+    <div class="modal fade" id="searchClassModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="height:100%;">
+        <div class="modal-dialog" role="document" style="height:100%;">
+            <div class="modal-content modalContent2">
+                <div class="modal-header">
+                    <p style="text-align:center; color:white; font-size:20px; font-weight:bold; width:100%;">
+                        Search Classes
+                    </p>
+                </div>
+                <div class="modal-body">
+                    <input id="signupEmailInput" autocomplete="off" class="input100" type="text" name="username" placeholder="Class ID" style="color:white;">
+                    <p style="color:white; font-weight:bold; text-align:center; font-size:20px;">or</p>
+                    <input id="signupEmailInput" autocomplete="off" class="input100" type="text" name="username" placeholder="Class Name" style="color:white;">
+                    <p style="color:white; font-weight:bold; text-align:center; font-size:20px;">or</p>
+                    <input id="signupEmailInput" autocomplete="off" class="input100" type="text" name="username" placeholder="Teacher Name" style="color:white;">
+                    <p style="color:white; font-weight:bold; text-align:center; font-size:20px;">or</p>
+                    <input id="signupEmailInput" autocomplete="off" class="input100" type="text" name="username" placeholder="Subject" style="color:white;">
+                </div>
+                <div class="modal-footer" style="height:80px;">
+                    <button type="button" class="modalButton left" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="modalButton right">Search</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Create A Class modal -->
+    <div class="modal fade" id="createClassModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="height:100%;">
+        <div class="modal-dialog" role="document" style="height:100%;">
+            <div class="modal-content modalContent2" style="top: 20%;">
+                <div class="modal-header">
+                    <p style="text-align:center; color:white; font-size:20px; font-weight:bold; width:100%;">
+                        Create A Class
+                    </p>
+                </div>
+                <div class="modal-body">
+                    <input id="newClassNameInput" autocomplete="off" class="input100" type="text" name="username" placeholder="Class Name">
+                    <input id="newClassSubjectInput" autocomplete="off" class="input100" type="text" name="username" placeholder="Subject">
+                    <br />
+                    <textarea id="newClassDescriptionInput" class="input100" placeholder="Description" height:120px;"></textarea>
+                </div>
+                <div class="modal-footer" style="height:80px;">
+                    <button type="button" class="modalButton left" data-dismiss="modal">Cancel</button>
+                    <button id="createClassButton" type="button" class="modalButton right">Create</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- sidebar -->
+    <div class="sidenav" id="sidenavID" style="position:fixed; top:0;">
+        <div style="width:200px; height:50px;     background-color: #00182D;"></div>
+        <a id="homeSideButton" href="home.html">Home</a>
+        <a id="classesSideButton" href="classPage.html">Classes</a>
+        <a id="labsSideButton">Labs</a>
+        <a id="modulesSideButton">Guided studies</a>
+        <a id="gradesSideButton">Grades</a>
+        <a id="settingsSideButton">Settings</a>
+        <img class="backgroundImage" src="torch2.jpg" />
+
+    </div>
+
+    <!-- welcomebar -->
+    <div id="welcomeDiv" class="mid" ">
+        <p id="welcomeBar" style="font-size:35px;">Welcome</p>
+    </div>
+    <hr />
+
+    <!-- home content -->
+    <div class="midHolder" id="homeDiv">
+
+
+
+
+
+        <!-- classes -->
+        <div id="classDiv" class="mid">
+            <h1 class="text-center">Your Classes</h1>
+            <div id="classesPlaceholder">~ classes will show here ~</div>
+            <div id="classesDiv"></div>
+            <br />
+            <button type="button" class="pageButton">Browse Classes</button>
+            <button type="button" class="pageButton" data-toggle="modal" data-target="#createClassModal">Create A Class</button>
+            <button type="button" class="pageButton" data-toggle="modal" data-target="#searchClassModal">Search Classes</button>
+        </div>
+        <hr />
+
+        <!-- open labs -->
+        <div id="labsDiv" class="mid">
+            <h1 class="text-center">Open Labs</h1>
+
+            <div id="labsPlaceholder">~ open labs will show here ~</div>
+            <div id="labsDiv"></div>
+        </div>
+        <hr />
+        <!-- open sessions -->
+        <div id="labsDiv" class="mid">
+            <h1 class="text-center">open Sessions</h1>
+
+            <div id="sessionsPlaceholder">~ open labs will show here ~</div>
+            <div id="sessionsDiv"></div>
+        </div>
+        <hr />
+
+        <!-- open guided study -->
+        <div id="guidedStudyDiv" class="mid">
+            <h1 class="text-center">Open Guided Study Modules</h1>
+
+            <div id="guidedStudyPlaceholder">~ guided study modules will show here ~</div>
+            <div id="guidedStudyDiv"></div>
+        </div>
+        <hr />
+    </div>
+    <!-- class page content -->
+    <div id="hat" class="midHolder" style="display:none;">
+
+        <!-- open guided study for this class -->
+        <div id="classModulesDivHolder" class="mid">
+            <h1 class="text-center">Open Guided Study Modules</h1>
+
+            <div id="classModulesPlaceholder">~ guided study modules will show here ~</div>
+            <div id="classModulesDiv"></div>
+            <button id="newModuleButton" class="customButton" data-toggle="modal" data-target="#newModuleModal">Create New</button>
+            <hr />
+        </div>
+        <!-- open labs for this class -->
+        <div id="classLabsDiv" class="mid">
+            <h1 class="text-center">Open Labs</h1>
+
+            <div id="classLabsPlaceholder">~ open labs will show here ~</div>
+            <div id="classLabsDiv"></div>
+            <hr />
+        </div>
+        <!-- open sessions for this class -->
+        <div id="classSessionsDiv" class="mid">
+            <h1 class="text-center">open Sessions</h1>
+
+            <div id="classSessionsPlaceholder">~ open labs will show here ~</div>
+            <div id="classSessionsDiv"></div>
+            <hr />
+        </div>
+
+
+
+    </div>
+    <!-- New Module Modal -->
+    <div class="modal fade" id="newModuleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="height:100%;">
+        <div class="modal-dialog" role="document" style="height:100%;">
+            <div class="modal-content modalContent2">
+                <div class="modal-header">
+                    <p style="text-align:center; color:white; font-size:20px; font-weight:bold; width:100%;">
+                        New Module
+                    </p>
+                </div>
+                <div class="modal-body">
+                    <input id="newModuleNameInput" autocomplete="off" class="input100" type="text" name="username" placeholder="Module Name" style="color:white; background-color:green;">
+                    <textarea id="newModuleDescriptionInput" autocomplete="off" class="ta" type="text" name="username" placeholder="Description" ></textarea>                   
+                </div>
+                <div class="modal-footer" style="height:80px;">
+                    <button type="button" class="customButton left" data-dismiss="modal">Cancel</button>
+                    <button type="button" id="saveNewModuleButton" data-dismiss="modal" class=" customButton right">Create</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- module view content -->
+    <div id="modulViewDiv" class="midHolder" style="display:none; height:100%;">
+        <div class="mid">
+            <h1 id="moduleName" class="text-center">Modules Name</h1>
+            <div id="moduleTilesPlaceholder">~ module tiles will show here ~</div>
+            <div id="moduleTilesDiv"></div>
+            <div id="afterTilesDiv"></div>
+            <div id="overTilesDiv" style="position:absolute; z-index:1; height:100%; width:100%; top:50px; left:200px; display:none;"></div>
+        </div>
+        <div id="clickScreen" style="display:none;">
+
+        </div>
+
+    </div>
+
+
+    <script>
+
+        // declare variables
+        var name;
+        var classIds = [];
+        var tiles = [];
+        var tilesUnordered = [];
+        var userRef;
+        var isAnonymous;
+        var currentClassId;
+        var currentModuleId;
+        var verbose = true;
+        var viewing = true;
+
+        // set sidebar to show we are on the home page
+        $("#homeSideButton").addClass("active");
+
+        // start by getting the user info
+        getAuth();
+        function getAuth() {
+            firebase.auth().onAuthStateChanged(function (user) {
+                if (user) {
+
+                    // only show the relivant buttons in the user dropdown
+                    userButtons();
+
+                    // get a ref to the user to get their id
+                    userRef = firebase.database().ref().child('structA').child('users').child(user.uid);
+
+                    isAnonymous = user.isAnonymous;
+                    if (isAnonymous) {
+                        setWelcomeBar("Anonymous User")
+                    }
+                    else {
+                        // get the users name for the welcome bar
+                        userRef.child("name").once("value", function (snap) { name = snap.val() });
+                        setWelcomeBar(name);
+                    }
+
+                    // load the users list of class ids
+                    loadClassesFromUser(userRef);
+                } else {
+                    window.location.href = 'index.html';
+                    noUserButtons();
+                }
+            });
+        }
+
+
+        $("#sidenavID").on("scroll", function (e) {
+
+            if (this.scrollTOP > 50)
+                console.log("over");
+        });
+        $("#accountButton").click(function () {
+            console.log("clicked accountButton");
+        });
+        $("#signoutButton").click(function () {
+            firebase.auth().signOut();
+            console.log("clicked signoutButton");
+        });
+        $("#signinButton").click(function () {
+            console.log("clicked signinButton");
+        });
+        $("#signupButton").click(function () {
+            console.log("clicked signupButton");
+        });
+        $("#anonButton").click(function () {
+            console.log("clicked anonButton");
+            firebase.auth().signInAnonymously().catch(function (error) {
+                // Handle Errors here.
+                var errorCode = error.code;
+                var errorMessage = error.message;
+            });
+        });
+
+        // create a class
+        $("#createClassButton").click(function () {
+
+            // get the info from the inputs
+            var className = document.getElementById("newClassNameInput").value;
+            var classDescription = document.getElementById("newClassDescriptionInput").value;
+
+            // save it to firebase
+            var dbRef = firebase.database().ref().child("structA");
+            var key = dbRef.child("classes").push().key;
+            dbRef.child("classes").child(key).set({
+                imageUrl: "images/chest.jpg",
+                name: className,
+                description: classDescription,
+                exists: true
+            });
+            var newCLassForUser = {};
+            newCLassForUser[key] = classDescription;
+            userRef.child("classes").update(newCLassForUser);
+
+            // reload the page
+            location.reload();
+
+        });
+
+
+
+        function userButtons() {
+
+
+            document.getElementById("signoutButton").style.display = "block";
+            document.getElementById("accountButton").style.display = "block";
+            document.getElementById("signinButton").style.visibility = "none";
+            document.getElementById("signupButton").style.visibility = "none";
+            document.getElementById("anonButton").style.visibility = "none";
+
+
+            document.getElementById("signoutButton").style.visibility = "visible";
+            document.getElementById("accountButton").style.visibility = "visible";
+            document.getElementById("signinButton").style.visibility = "hidden";
+            document.getElementById("signupButton").style.visibility = "hidden";
+            document.getElementById("anonButton").style.visibility = "hidden";
+            document.getElementById("ddc").style.height = "140px";
+            console.log("logged in");
+        }
+        function noUserButtons() {
+            //document.getElementById("signoutButton").style.position = "absolute";
+            //document.getElementById("accountButton").style.position = "absolute";
+            //document.getElementById("accountButton").innerHTML = "";
+
+            document.getElementById("signoutButton").style.display = "none";
+            document.getElementById("accountButton").style.display = "none";
+            document.getElementById("signinButton").style.visibility = "block";
+            document.getElementById("signupButton").style.visibility = "block";
+            document.getElementById("anonButton").style.visibility = "block";
+
+
+            document.getElementById("signoutButton").style.visibility = "hidden";
+            document.getElementById("accountButton").style.visibility = "hidden";
+            document.getElementById("signinButton").style.visibility = "visible";
+            document.getElementById("signupButton").style.visibility = "visible";
+            document.getElementById("anonButton").style.visibility = "visible";
+            document.getElementById("ddc").style.height = "140px";
+            console.log("logged out");
+        }
+        function setWelcomeBar(name) {
+            document.getElementById("welcomeBar").innerHTML = "welcome " + name;
+        }
+        $("#homeButton").click(function () {
+            window.location.href = "home.html";
+        });
+
+        function loadClassesFromUser(ref) {
+            ref.child("classes").once("value", function (snapshot) {
+                snapshot.forEach(function (c) {
+                    //console.log(c.val());
+                    //showClass(c.val());
+                    classIds.push(c.key);
+                });
+                // use the array after it has been retrieved
+                useClassRefArray();
+            });
+        }
+        function useClassRefArray(classId) {
+            classIds.forEach(function (classId) {
+                removeOld(classId);
+                firebase.database().ref().child("structA").child("classes").child(classId).on("value", function (snap) {
+                    removeOld(classId);
+                    // add this class to the html
+                    addClassHtml(snap.child("name").val(), snap.child("description").val(), snap.child("imageUrl").val(), classId);
+
+                    // add the labs for this class to the html
+                    snap.child("labs").forEach(function (lab) {
+                        console.log(lab.key);
+                        if (lab.child("active").val() == "true") {
+                            addLabHtml(lab.child("name").val(), lab.child("description").val(), lab.child("imageUrl").val(), lab.child("labUrl").val(), classId);
+                        }
+                    });
+
+                    // load the sessions
+                    snap.child("sessions").forEach(function (session) {
+                        console.log("a? = " + session.child("active").val());
+                        if (session.child("active").val() == "true")
+                            addSessionHtml(session.child("name").val(), session.child("description").val(), classId, session.key);
+                    });
+                });
+            });
+        }
+        function removeOld(classIdClass) {
+            console.log("removing all with class " + classIdClass);
+            $('.' + classIdClass).remove();
+        }
+        // add the html for the given data
+        function addClassHtml(name, description, imageUrl, classId) {
+            // put the html code here and += it to the proper spot
+            document.getElementById("classesPlaceholder").innerHTML = "";
+
+            var newCard = '' +
+                '<div class="card ' + classId + '" style="width: 18rem; margin:20px; display:inline-block;">' +
+                '<img src="' + imageUrl + '" class="card-img-top" alt="...">' +
+                '<div class="card-body">' +
+                '<h5 class="card-title">' + name + '</h5>' +
+                '<p class="card-text">' + description + '</p>' +
+                '<button onClick="openClass(\'' + classId + '\')" class="btn btn-primary"> <a style="color:white;" href="#" >Open Class</a></button>' +
+                '</div>' +
+                '</div>';
+            document.getElementById("classesDiv").innerHTML += newCard;
+
+        }
+        function addSessionHtml(name, description, classId, sessionId) {
+            // put the html code here and += it to the proper spot
+            document.getElementById("sessionsPlaceholder").innerHTML = "";
+            var newCard = '' +
+                '<div class="card ' + classId + '" style="width: 18rem; margin:20px; display:inline-block;">' +
+                '<div class="card-body">' +
+                '<h5 class="card-title">' + name + '</h5>' +
+                '<p class="card-text">' + description + '</p>' +
+                // " will start and end the onClick area, ' will start and end the html literal, \' will be seen as ' in the html
+                '<button onClick="goToSession(\'' + sessionId + '\',\'' + classId + '\')" class="btn btn-primary">Open Session</button>' +
+                //'<button onClick="openLab(\'' + labUrl + '\')" class="btn btn-primary">Open Lab</button>' +
+
+                '</div>' +
+                '</div>';
+            document.getElementById("sessionsDiv").innerHTML += newCard;
+        }
+        function addLabHtml(name, description, imageUrl, labUrl, classId) {
+            // put the html code here and += it to the proper spot
+            document.getElementById("labsPlaceholder").innerHTML = "";
+            var newCard = '' +
+                '<div class="card ' + classId + '" style="width: 18rem; margin:20px; display:inline-block;">' +
+                '<img src="' + imageUrl + '" class="card-img-top" alt="...">' +
+                '<div class="card-body">' +
+                '<h5 class="card-title">' + name + '</h5>' +
+                '<p class="card-text">' + description + '</p>' +
+                '<button onClick="openLab(\'' + labUrl + '\')" class="btn btn-primary">Open Lab</button>' +
+                '</div>' +
+                '</div>';
+            document.getElementById("labsDiv").innerHTML += newCard;
+        }
+        function openLab(labUrl) {
+            window.open(labUrl, '_blank');
+        }
+
+        function openClass(classId) {
+            currentClassId = classId;
+            console.log("opening " + classId);
+            //ghs2() (this is the sound)
+
+            // change the title
+            document.getElementById("title").innerHTML = "Class Home";
+
+            // set all home elements to invisible
+            document.getElementById("homeDiv").style.display = "none";
+            $("#homeSideButton").removeClass("active");
+
+            // show all class page elements
+            document.getElementById("hat").style.display = "block";
+            $("#classesSideButton").addClass("active");
+
+            // load all class data
+            loadClassPageContent();
+        }
+
+
+        // ========================= class page ========================= \\
+        var x = 1;
+        // load and display the content
+        function loadClassPageContent() {
+
+            //get a ref to this class
+            var classRef = firebase.database().ref().child("structA").child("classes").child(currentClassId);
+            // listen for changes to the class
+            classRef.on("value", function (snap) {
+
+            document.getElementById("classModulesDiv").innerHTML ="";
+
+                // get all of the modules
+                snap.child("modules").forEach(function (module) {
+                    //make the html for tha lab and add it to where it goes
+                    addModuleHtml(module.child("name").val(), module.child("description").val(), module.child("imageUrl").val(), module.key);
+                });
+
+            });
+            // load all of the data
+            //classRef.child("modules")
+
+        }
+        function addModuleHtml(name, description, imageUrl, moduleId) {
+            // put the html code here and += it to the proper spot
+            //document.getElementById("classModulesPlaceholder").innerHTML = "";
+
+
+            var newCard = '' +
+                '<div class="card ' + moduleId + '" style="width: 18rem; margin:20px; display:inline-block;">' +
+                '<img src="' + imageUrl + '" class="card-img-top" alt="...">' +
+                '<div class="card-body">' +
+                '<h5 class="card-title">' + name + '</h5>' +
+                '<p class="card-text">' + description + '</p>' +
+                '<button onClick="editModule(\'' + moduleId + '\')" class="customButton"> <a style="color:white;" href="#" >Edit</a></button>' +
+                '<button onClick="viewModule(\'' + moduleId + '\')" class="customButton"> <a style="color:white;" href="#" >View</a></button>' +
+                '</div>' +
+                '</div>';
+            document.getElementById("classModulesDiv").innerHTML += newCard;
+
+        }
+
+        // create a new module
+        $("#saveNewModuleButton").click(function () {
+            var modulesRef = firebase.database().ref().child("structA").child("classes").child(currentClassId).child("modules");
+            var newName = document.getElementById("newModuleNameInput").value;
+            var newDescription = document.getElementById("newModuleDescriptionInput").value;
+
+            var key = modulesRef.push().key;
+            modulesRef.child(key).set({
+                name: newName,
+                description: newDescription,
+                imageUrl: "images/chest.jpg",
+                tiles: {
+                    idOne: {
+                        type:"text",
+                        position: 0,
+                        content:"contents go here"
+                    }
+                }
+
+            });
+        });
+
+        // set an answer as correct
+        function setCorrectAnswer(tileId, answerId) {
+            var moduleRef = firebase.database().ref().child("structA").child("classes").child(currentClassId).child("modules").child(currentModuleId);
+            var answerRef = moduleRef.child("tiles").child(tileId).child("answers").child(answerId);
+            if (verbose == true)
+                console.log("tryna set " + tileId + " " + answerId);
+            answerRef.once("value", function (answer) {
+                if (answer.child("correct").val() == true)
+                    answerRef.update({ correct: false });
+                else
+                    answerRef.update({ correct: true });
+            });
+        }
+
+        // ========================= edit module ========================= \\
+        function editModule(moduleId) {
+            // sets a few variables and makes the correct html elements visible, then calls loadModuleTiles
+
+            viewing = false;
+            currentModuleId = moduleId;
+            if (verbose == true)
+                console.log("at editModule with " + currentModuleId);
+            // hide other divs (maybe can do this by adding or removing classes at some point)
+            document.getElementById("homeDiv").style.display = "none";
+            document.getElementById("hat").style.display = "none";
+            // show the view module div
+            document.getElementById("modulViewDiv").style.display = "block";
+
+            loadModuleTiles();
+        }
+        function addTileEditHtml() {
+            document.getElementById("moduleTilesDiv").innerHTML = "";
+            tiles.forEach(function (tile) {
+                document.getElementById("moduleTilesPlaceholder").innerHTML = "";
+
+                if (tile.type == "text") {
+                    //document.getElementById("moduleTilesDiv").innerHTML += "" +
+                    var newHtml = "" +
+                        "<div class='editTile'>" +
+                        "<button class='customButton' onClick='deleteTile(\"" + tile.id + "\")'>Delete Tile</button>" +
+                        "<div style='display:inline-block; margin-left:20px;'>" +
+                        "<p style='color:white; font-weight:bold; display:inline-block;' > Tile Type:</p>" +
+                        "<select class='customButton' id='typeSelector" + tile.id + "' onchange='setType(\"" + tile.id + "\",value)'>" +
+                        "<option class='customButton' value='text' selected>Text</option>" +
+                        "<option class='customButton' value='text'>Text</option>" +
+                        "<option class='customButton' value='question'>Question</option>" +
+                        "<option class='customButton' value='definition'>Definition</option>" +
+                        "<option class='customButton' value='video'>Video</option>" +
+                        "<option class='customButton' value='quiz'>Quiz</option>" +
+                        "</select>" +
+                        "</div>" +
+                        "<p style='color:white; font-weight:bold; display:inline-block; margin-left:20px;'> Position:</p>" +
+                        "<input type='text' onChange='updatePosition(\"" + tile.id + "\")' id='positionInput" + tile.id + "' style='display:inline-block; width:80px; background-color:#2A5C99; color:white; font-weight:bold; text-align:center; margin-left:10px;' value='" + tile.position + "'>" +
+
+                        "<textarea id='textArea" + tile.id + "' onChange='updateTileText(\"" + tile.id + "\")'>" + tile.content + "</textarea>" +
+                        "<div>";
+                } else if (tile.type == "question") {
+                    if (verbose == true)
+                        console.log("adding " + tile.id);
+                    var newHtml = "" +
+                        "<div class='editTile'>" +
+                        "<button class='customButton' onClick='deleteTile(\"" + tile.id + "\")'>Delete Tile</button>" +
+                        "<div style='display:inline-block; margin-left:20px;'>" +
+                        "<p style='color:white; font-weight:bold; display:inline-block;' > Tile Type:</p>" +
+                        "<select class='customButton' id='typeSelector" + tile.id + "' onchange='setType(\"" + tile.id + "\",value)'>" +
+                        "<option class='customButton' value='text'>Text</option>" +
+                        "<option class='customButton' value='text'>Text</option>" +
+                        "<option class='customButton' value='question' selected>Question</option>" +
+                        "<option class='customButton' value='definition'>Definition</option>" +
+                        "<option class='customButton' value='video'>Video</option>" +
+                        "<option class='customButton' value='quiz'>Quiz</option>" +
+                        "</select>" +
+                        "</div>" +
+                        "<p style='color:white; font-weight:bold; display:inline-block; margin-left:20px;'> Position:</p>" +
+                        "<input type='text' onChange='updatePosition(\"" + tile.id + "\")' id='positionInput" + tile.id + "' style='display:inline-block; width:80px; background-color:#2A5C99; color:white; font-weight:bold; text-align:center; margin-left:10px;' value='" + tile.position + "'>" +
+                        "<hr style='color:white; background-color:white;'/>" +
+                        "<p style='color:white; font-weight:bold; margin-left:20px; font-size:20px; margin-top:15px;'> Question </p>" +
+                        "<textarea id='textArea" + tile.id + "' onChange='updateTileText(\"" + tile.id + "\")' style='height:auto;'>" + tile.content + "</textarea>" +
+                        "<hr style='color:white; background-color:white;'/>" +
+                        "<p style='color:white; font-weight:bold; margin-left:20px;  font-size:20px; margin-top:15px;'> Answer Choices </p>" +
+                        "<div>";
+                    if (verbose == true)
+                        console.log("with " + tile.answers.length + " answers");
+                    tile.answers.forEach(function (answer) {
+                        if (verbose == true)
+                            console.log("adding answer" + answer.answerContent);
+                        // could make a struct with id and content for each answer, then make an array of those in the tile class
+                        if (answer.correct == true)
+                            newHtml += "<br/>s<input checked id='correctAnswerCheckbox" + answer.id + "' onClick='setCorrectAnswer(\"" + tile.id + "\",\"" + answer.firebaseKey + "\")' type='checkbox' style='display:inline-block; margin:10px;'>";
+                        else
+                            newHtml += "<br/>s<input id='correctAnswerCheckbox" + answer.id + "' onClick='setCorrectAnswer(\"" + tile.id + "\",\"" + answer.firebaseKey + "\")' type='checkbox' style='display:inline-block; margin:10px;'>";
+                        newHtml += "<textarea id='answer" + tile.id + answer.firebaseKey + "' onChange='updateAnswerText(\"" + tile.id + "\",\"" + answer.firebaseKey + "\")' style='height:auto; width:80%;'>" + answer.answerContent + "</textarea>";
+                        newHtml += "<button class='customButton' onClick='deleteAnswer(\"" + tile.id + "\",\"" + answer.firebaseKey + "\")'>Delete</button>";
+                    });
+
+                    newHtml += "<br/><button class='customButton' onClick='addAnswer(\"" + tile.id + "\")'>Add Answer</button>";
+
+
+                    //document.getElementById("moduleTilesDiv").innerHTML += newHtml;
+                } else if (tile.type == "video") {
+                    // has same format as above but with an iframe after the content textarea
+                    // content section labeled as "youtube link" above
+                    // add question button 
+                    // question tile in it has same format as question but has a time to appear
+                    // have to add /embed/ after youtube.com
+                    // also have to refresh everything
+                    // maybe make updateTileTextForVideo()
+                    // ewnable add blocker on site somehow
+                    var newHtml = '' +
+                        "<div class='editTile'> id='tileDiv" + tile.id + "'>" +
+                        "<button class='customButton' onClick='deleteTile(\"" + tile.id + "\")'>Delete Tile</button>" +
+                        "<div style='display:inline-block; margin-left:20px;'>" +
+                        "<p style='color:white; font-weight:bold; display:inline-block;' > Tile Type:</p>" +
+                        "<select class='customButton' id='typeSelector" + tile.id + "' onchange='setType(\"" + tile.id + "\",value)'>" +
+                        "<option class='customButton' value='text' >Text</option>" +
+                        "<option class='customButton' value='text'>Text</option>" +
+                        "<option class='customButton' value='question'>Question</option>" +
+                        "<option class='customButton' value='definition'>Definition</option>" +
+                        "<option selected class='customButton' value='video'>Video</option>" +
+                        "<option class='customButton' value='quiz'>Quiz</option>" +
+                        "</select>" +
+                        "</div>" +
+                        "<p style='color:white; font-weight:bold; display:inline-block; margin-left:20px;'> Position:</p>" +
+                        "<input type='text' onChange='updatePosition(\"" + tile.id + "\")' id='positionInput" + tile.id + "' style='display:inline-block; width:80px; background-color:#2A5C99; color:white; font-weight:bold; text-align:center; margin-left:10px;' value='" + tile.position + "'>" +
+                        "<hr style='color:white; background-color:white;'/>" +
+                        "<p style='color:white; font-weight:bold; margin-left:20px; font-size:20px; margin-top:15px;'> Youtube Link: </p>" +
+                        "<textarea id='textArea" + tile.id + "' onChange='updateTileTextForVideo(\"" + tile.id + "\");  refresh();' style='height:80px;'>" + tile.content + "</textarea>" +
+                        "<hr style='color:white; background-color:white;'/>" +
+                        "<p style='color:white; font-weight:bold; margin-left:20px; font-size:20px; margin-top:15px;'> Video From Youtube Link: </p>" +
+                        "<div><iframe width='560' height='315' src='" + tile.content + "' frameborder='0' allow='encrypted-media; picture-in-picture' allowfullscreen>" +
+                        "</iframe ></div>";// +
+                    //"<hr style='color:white; background-color:white;'/>" +
+                    //"<p style='color:white; font-weight:bold; margin-left:20px; font-size:20px; margin-top:15px;'> Embeded Questions: </p>";
+
+                    // show all the question html here
+                    // maybe add a tile inside this tile under videoQuestions
+
+                    // add question html to innerHTML of "tileDiv"+tileID in the section wher you add the main html
+                    // need to put them in tiles array somehow
+                    /*
+                    tile.videoQuestions.forEach(function (videoQuestion) {
+                        newHtml += ""+
+                        "<div class='editTile'style='background-color:#001628; width:100%; margin-left:0px; border-width: 2px; border-color:black; border-style:solid; '> " +
+                        "<button class='customButton' onClick='deleteVideoQuestion(\"" + tile.id + "\",\"" + videoQuestion.id + "\")'>Delete Tile</button>" +
+                        "<div style='display:inline-block; margin-left:20px;'>" +
+                        "<p style='color:white; font-weight:bold; display:inline-block;' > Tile Type:</p>" +
+                        "<select class='customButton' id='typeSelector" + tile.id + "' onchange='setType(\"" + tile.id + "\",value)'>" +
+                        "<option class='customButton' value='text'>Text</option>" +
+                        "<option class='customButton' value='text'>Text</option>" +
+                        "<option class='customButton' value='question' selected>Question</option>" +
+                        "<option class='customButton' value='definition'>Definition</option>" +
+                        "<option class='customButton' value='video'>Video</option>" +
+                        "<option class='customButton' value='quiz'>Quiz</option>" +
+                        "</select>" +
+                        "</div>" +
+                            "<p style='color:white; font-weight:bold; display:inline-block; margin-left:20px;'> Position:</p>" +
+                            "<input type='text' onChange='updatePosition(\"" + tile.id + "\")' id='positionInput" + tile.id + videoQuestion.id + "' style='display:inline-block; width:80px; background-color:#2A5C99; color:white; font-weight:bold; text-align:center; margin-left:10px;' value='" + tile.position + "'>" +                    
+                        "<hr style='color:white; background-color:white;'/>"+
+                        "<p style='color:white; font-weight:bold; margin-left:20px; font-size:20px; margin-top:15px;'> Question </p>" +
+                        "<textarea id='textArea" + tile.id + videoQuestion.id + "' onChange='updateVideoQuestionText(\"" + tile.id + "\",\"" + videoQuestion.id + "\")' style='height:auto;'>" + videoQuestion.content + "</textarea>" +
+                        "<hr style='color:white; background-color:white;'/>" +
+                        "<p style='color:white; font-weight:bold; margin-left:20px;  font-size:20px; margin-top:15px;'> Answer Choices </p>" +
+                        "</div>";
+
+                        videoQuestion.answers.forEach(function (answer) {
+                            // could make a struct with id and content for each answer, then make an array of those in the tile class
+                            newHtml += "<textarea id='answer" + tile.id + videoQuestion.id.answer.firebaseKey + "' onChange='updateAnswerText(\"" + tile.id + "\",\"" + answer.firebaseKey + "\")' style='height:auto; width:80%;'>" + answer.answerContent + "</textarea>";
+                            newHtml += "<button class='customButton' onClick='deleteVideoQuestionAnswer(\"" + tile.id + "\",\"" + videoQuestion.id + "\"" + answer.firebaseKey + "\")'>Delete</button>";
+                        });
+                    });
+                    newHtml += "<button class='customButton' onClick='addVideoQuestion(\"" + tile.id + "\")'>Add Question</button>";
+                    */
+                    newHtml += "</div>";
+                    //document.getElementById("moduleTilesDiv").innerHTML += newHtml;
+
+                } else if (tile.type == "quiz") {
+                    // adds every question tile into the quiz
+                    // on view displays them in random order
+                }
+                else if (tile.type == "definition") {if (verbose == true)
+                        console.log("adding " + tile.id);
+                    var newHtml = "" +
+                        "<div class='editTile'>" +
+                        "<button class='customButton' onClick='deleteTile(\"" + tile.id + "\")'>Delete Tile</button>" +
+                        "<div style='display:inline-block; margin-left:20px;'>" +
+                        "<p style='color:white; font-weight:bold; display:inline-block;' > Tile Type:</p>" +
+                        "<select class='customButton' id='typeSelector" + tile.id + "' onchange='setType(\"" + tile.id + "\",value)'>" +
+                        "<option class='customButton' value='text'>Text</option>" +
+                        "<option class='customButton' value='text'>Text</option>" +
+                        "<option class='customButton' value='question' >Question</option>" +
+                        "<option class='customButton' value='definition' selected>Definition</option>" +
+                        "<option class='customButton' value='video'>Video</option>" +
+                        "<option class='customButton' value='quiz'>Quiz</option>" +
+                        "</select>" +
+                        "</div>" +
+                        "<p style='color:white; font-weight:bold; display:inline-block; margin-left:20px;'> Position:</p>" +
+                        "<input type='text' onChange='updatePosition(\"" + tile.id + "\")' id='positionInput" + tile.id + "' style='display:inline-block; width:80px; background-color:#2A5C99; color:white; font-weight:bold; text-align:center; margin-left:10px;' value='" + tile.position + "'>" +
+                        "<hr style='color:white; background-color:white;'/>" +
+                        "<p style='color:white; font-weight:bold; margin-left:20px; font-size:20px; margin-top:15px;'> Question </p>" +
+                        "<textarea id='textArea" + tile.id + "' onChange='updateTileText(\"" + tile.id + "\")' style='height:auto;'>" + tile.content + "</textarea>" +
+                        "<hr style='color:white; background-color:white;'/>" +
+                        "<p style='color:white; font-weight:bold; margin-left:20px;  font-size:20px; margin-top:15px;'> Answer Choices </p>" +
+                        "<div>";
+                    if (verbose == true)
+                        console.log("with " + tile.answers.length + " answers");
+                    tile.answers.forEach(function (answer) {
+                        if (verbose == true)
+                            console.log("adding answer" + answer.answerContent);
+                        // could make a struct with id and content for each answer, then make an array of those in the tile class
+                        if (answer.correct == true)
+                            newHtml += "<br/>s<input checked id='correctAnswerCheckbox" + answer.id + "' onClick='setCorrectAnswer(\"" + tile.id + "\",\"" + answer.firebaseKey + "\")' type='checkbox' style='display:inline-block; margin:10px;'>";
+                        else
+                            newHtml += "<br/>s<input id='correctAnswerCheckbox" + answer.id + "' onClick='setCorrectAnswer(\"" + tile.id + "\",\"" + answer.firebaseKey + "\")' type='checkbox' style='display:inline-block; margin:10px;'>";
+                        newHtml += "<textarea id='answer" + tile.id + answer.firebaseKey + "' onChange='updateAnswerText(\"" + tile.id + "\",\"" + answer.firebaseKey + "\")' style='height:auto; width:80%;'>" + answer.answerContent + "</textarea>";
+                        newHtml += "<button class='customButton' onClick='deleteAnswer(\"" + tile.id + "\",\"" + answer.firebaseKey + "\")'>Delete</button>";
+                    });
+
+                    newHtml += "<br/><button class='customButton' onClick='addAnswer(\"" + tile.id + "\")'>Add Answer</button>";
+
+
+                    //document.getElementById("moduleTilesDiv").innerHTML += newHtml;
+                }
+                var newPosition = parseFloat(tile.position) + 0.1;
+                newHtml += '</div></div><button id="newTileButton" onClick="addTileAtPosition(' + newPosition + ')" class="customButton" style="width:150px; margin-top:10px;">Add Tile</button>';
+                
+                
+                document.getElementById("moduleTilesDiv").innerHTML += newHtml;
+            });
+        }
+        // this is for the change to orange
+        document.onkeyup = function (e) {
+            //https://medium.com/@melwinalm/crcreating-keyboard-shortcuts-in-javascripteating-keyboard-shortcuts-in-javascript-763ca19beb9e
+            if (e.ctrlKey && e.which == 81) {
+                //alert("Ctrl Z shortcut combination was pressed");
+                //https://www.everythingfrontend.com/posts/insert-text-into-textarea-at-cursor-position.html
+                //https://stackoverflow.com/questions/5379120/get-the-highlighted-selected-text
+                var text = window.getSelection().toString();
+                text = "<span style='color:darkorange;'>" + text + "</span>";
+                document.execCommand('insertText', false /*no UI*/, text);                
+            }
+        };
+
+
+        // ========================= view module ========================= \\
+        function viewModule(moduleId) {
+            // set the viewing, and moduleId ,and count variables; sohw correct divs; call loadModuleTiles()
+
+            viewing = true;
+            currentModuleId = moduleId;
+
+            if (verbose == true)
+                console.log("at viewModule with " + currentModuleId);
+
+            // hide other divs (maybe can do this by adding or removing classes at some point)
+            document.getElementById("homeDiv").style.display = "none";
+            document.getElementById("hat").style.display = "none";
+            // show the view module div
+            document.getElementById("modulViewDiv").style.display = "block";
+
+            count = 0;
+            loadModuleTiles();
+        }
+        function addTileViewHtml2() {
+            // this function adds the html for the next tile based on count variable (incremented by got it function)
+
+            // check for completeness
+            if (count == tiles.length) {
+                // add a completed message, update in user data, make return button
+                return;
+            }
+
+            // get the next tile from the array
+            var tile = tiles[count];
+            document.getElementById("moduleTilesPlaceholder").innerHTML = "";
+
+            if (tile.type == "text") {
+
+                blurTiles(0);
+
+                var newText = "<div class='viewTile'>" + tile.content + "</div><br/>";
+                document.getElementById("moduleTilesDiv").innerHTML += newText;
+            } else if (tile.type == "question") {
+
+                blurTiles(1);
+                clickedAnAnswer = false;
+
+                var newText = "<div class='viewQuestionTile'>" + tile.content +"<hr>";
+                tile.answers.forEach(function (answer) {
+                    newText += "<br><button id='answer" + tile.id + answer.firebaseKey + "' class='viewQuestionButton' onClick='checkAnswer(\"" + tile.id + "\",\"" + answer.firebaseKey + "\")'>" + answer.answerContent + "</button>";
+                });
+                newText += "</div><br/>";
+                document.getElementById("moduleTilesDiv").innerHTML += newText;
+            }else if (tile.type == "definition") {
+
+                blurTiles(1);
+                clickedAnAnswer = false;
+
+                var newText = "<div class='viewQuestionTile'>" + tile.content + "<hr>";
+                newText += "<input style='width:95%; height:40px; margin:10px;'></input>";
+                newText += "<br><button id='definition" + tile.id + "' class='viewQuestionButton' onClick='checkDefinition(\"" + tile.id + "\")'>" + "Check Definition" + "</button>";
+                //tile.answers.forEach(function (answer) {
+                    //newText += "<br><button id='answer" + tile.id + answer.firebaseKey + "' class='viewQuestionButton' onClick='checkAnswer(\"" + tile.id + "\",\"" + answer.firebaseKey + "\")'>" + answer.answerContent + "</button>";
+                //});
+                newText += "</div><br/>";
+                document.getElementById("moduleTilesDiv").innerHTML += newText;
+            }else if (tile.type == "video") {
+                var newText = "<br/>"+
+                "<div><iframe width='800px' height='500px' src='" + tile.content + "' frameborder='0' allow='encrypted-media; picture-in-picture' allowfullscreen>" +
+                "</iframe >";
+                document.getElementById("moduleTilesDiv").innerHTML += newText;
+            }
+        }
+        function blurTiles(mode) {
+            if (mode == 1) {
+                var viewTilesArray = document.getElementsByClassName("viewTile");
+                for (var i = 0; i < viewTilesArray.length; i++) {
+                    viewTilesArray.item(i).style.filter = "blur(20px)";
+                }
+            } else {
+                var viewTilesArray = document.getElementsByClassName("viewTile");
+                for (var i = 0; i < viewTilesArray.length; i++) {
+                    viewTilesArray.item(i).style.filter = "blur(0px)";
+                }
+            }
+        }
+        var clickedAnAnswer = true;
+        function checkAnswer(tileId, answerId) {
+            clickedAnAnswer = true;
+            if (verbose == true)
+                console.log("checked answer form tile " + tileId + " ans answer id " + answerId);
+            var tileRef = firebase.database().ref().child("structA").child("classes").child(currentClassId).child("modules").child(currentModuleId).child("tiles").child(tileId);
+            tileRef.once("value", function (tile) {
+                tile.child("answers").forEach(function (answer) {
+                    if (answer.child("correct").val() == true) {
+                        if (answer.key == answerId) {
+                            // play victory sound
+                        }
+                        document.getElementById("answer" + tileId + answer.key).classList.add("correctAnswer");
+                    } else {
+                        document.getElementById("answer" + tileId + answer.key).classList.add("wrongAnswer");
+                    }
+
+                });
+                
+            });
+
+        }
+        function checkDefinition(tileId) {
+            // thisfunction is given the tile id and loads the answers from the db
+            // it then changes the color class be getting the element which has the answer dbkey in its id
+            clickedAnAnswer = true;
+            // set button id to tile dbkey, take the tile id in f, get the correct answer from firebase, set button text to correct answer
+            //if (verbose == true)
+                //console.log("checked answer form tile " + tileId + " ans answer id " + answerId);
+            var tileRef = firebase.database().ref().child("structA").child("classes").child(currentClassId).child("modules").child(currentModuleId).child("tiles").child(tileId);
+            tileRef.once("value", function (tile) {
+                tile.child("answers").forEach(function (answer) {
+                    if (answer.child("correct").val() == true) {
+                        //if (answer.key == answerId) {
+                            // play victory sound
+                        //}
+                        //document.getElementById("answer" + tileId + answer.key).classList.add("correctAnswer");
+                        document.getElementById("definition" + tileId).innerHTML = answer.child("text").val();
+                    } else {
+                        //document.getElementById("answer" + tileId + answer.key).classList.add("wrongAnswer");
+                    }
+
+                });
+                
+            });
+
+        }
+        var count = 0;
+        var tempCount = 0;
+        // maybe only show one section at a time? or in groups       
+        function addTileViewHtml() {
+            tempCount = 0;
+            //document.getElementById("moduleTilesDiv").innerHTML = "";
+            //tiles.forEach(function (tile) {
+            var tile = tiles[count];
+                document.getElementById("moduleTilesPlaceholder").innerHTML = "";
+            // style="filter:blur(20px);"
+            if (tempCount <= count) {
+
+                // clear out any old quesitons
+                document.getElementById("overTilesDiv").innerHTML = "";
+
+                // blur whatever is not the question
+                if (tile.type == "question") {
+                    clickedAnAnswer = false;
+                    document.getElementById("moduleTilesDiv").style.filter = "blur(20px)";
+                    document.getElementById("overTilesDiv").style.display = "block";
+                }
+                else {
+                    document.getElementById("moduleTilesDiv").style.filter = "unset";
+                    document.getElementById("overTilesDiv").style.display = "none";
+                }
+
+                // ========== text ==========
+                    if (tile.type == "text") {
+                        var newText = "<div class='viewTile'>"+tile.content + "</div><br/>";
+                        document.getElementById("moduleTilesDiv").innerHTML += newText;
+
+                    } else if (tile.type == "question") {
+                        var newText = tile.content + "<br/>";
+                        tile.answers.forEach(function (Answer) {
+                            newText += "<br/><button class='customButton'>" + Answer.answerContent+"<button>";
+                        });
+                        
+                        var newHtml = "" +
+                            "<div class='editTile overQuestion' >" +
+                            "<p style='color:white; font-weight:bold; display:inline-block; margin-left:20px;'>" + tile.content + "</p>" +
+                            "<hr style='color:white; background-color:white;'/>";                        
+
+                        tile.answers.forEach(function (answer) {
+                            // could make a struct with id and content for each answer, then make an array of those in the tile class
+                            newHtml += "<button id='answer" + tile.id + answer.firebaseKey + "' onClick='checkAnswer(\"" + tile.id+"," + answer.firebaseKey + "\")' style='height:auto; width:80%;'>" + answer.answerContent + "</button>";
+                        });
+                        newHtml += "<button class='customButton' onclick='gotItFunction()'> Got It </button></div>";
+
+
+
+                        document.getElementById("moduleTilesDiv").innerHTML += newHtml;
+                        //document.getElementById("overTilesDiv").innerHTML += newHtml;
+
+                    } else if (tile.type == "video") {
+                        var newText = "<br/>"+
+                        "<div><iframe width='800px' height='500px' src='" + tile.content + "' frameborder='0' allow='encrypted-media; picture-in-picture' allowfullscreen>" +
+                        "</iframe >";
+                        document.getElementById("moduleTilesDiv").innerHTML += newText;
+                    }
+
+                }
+                tempCount++;
+
+           // });
+        }
+
+        function gotItFunction() {
+
+            if (clickedAnAnswer == false)
+                return;
+
+            count++;
+            if (count > tiles.length) {
+                // return or go to next
+                location.reload();
+            }
+            else if (count == tiles.length) {
+                blurTiles(0);
+                document.getElementById("gotItButton").innerHTML = "Finish";
+            }
+            else if (count == tiles.length-1)
+                document.getElementById("gotItButton").innerHTML = "Review";
+            else
+                document.getElementById("gotItButton").innerHTML = "Got It";
+            addTileViewHtml2();            
+        }
+        // ========================= both modules ========================= \\
+        function loadModuleTiles() {
+            // clears the array of tiles; pushes tiles from database into tiles array; call orderTiles; call addTileViewHtml
+
+            if (verbose == true)
+                console.log("at load module tiles");
+
+            // clear out the current array (make a new one)
+            tiles = [];
+
+            // pull the tiles form the db
+            var moduleRef = firebase.database().ref().child("structA").child("classes").child(currentClassId).child("modules").child(currentModuleId);
+            moduleRef.once("value", function (module) {
+                if (verbose == true)
+                    console.log("pulling from " + currentClassId + "/" + currentModuleId);
+
+                document.getElementById("moduleName").innerHTML = module.child("name").val();
+                module.child("tiles").forEach(function (tile) {
+                    //if (verbose == true)
+                    //    console.log("in" + currentClassId + "/" + currentModuleId+".child('tiles')");
+                    // crate a new tile here and push it to the array
+                    // loadClassesFromUser line 400:  classIds.push(c.key);
+                    // use class ref funciton uses it
+                    if (verbose == true)
+                        console.log("pushing tile " + tile.key + " with type " + tile.child("type").val() + " and position " + tile.child("position").val());
+                   
+                    tiles.push(new Tile(tile.key, tile.child("type").val(), tile.child("position").val(), tile.child("content").val()));
+
+                    if (tile.child("type").val() == "question" || tile.child("type").val() == "definition") {
+                        //var answersTemp = [];
+                        tile.child("answers").forEach(function (answer) {
+                            if (verbose == true)
+                                console.log("pushed " + answer.child("text").val());
+                            tiles[tiles.length - 1].answers.push(new Answer(answer.key, answer.child("text").val(), answer.child("correct").val()));
+                        });
+                    }
+                    else if (tile.child("type").val() == "video") {
+                        tile.child("videoQuestions").forEach(function (videoQuestion) {
+                            tiles[tiles.length - 1].videoQuestions.push(new VideoQuestionTile(videoQuestion.key, videoQuestion.child("position"), videoQuestion.child("content").val()))
+                            videoQuestion.child("answers").forEach(function (videoQuestionAnswer) {
+                                console.log(videoQuestionAnswer.child("text").val());
+                                //tiles[tiles.length - 1].videoQuestions[0].answers.push(new Answer(videoQuestionAnswer.key, videoQuestionAnswer.child("text").val()));
+                                //tiles[tiles.length - 1].videoQuestions[tiles[tiles.length - 1].videoQuestions.length].answers.push(new Answer(videoQuestionAnswer.key, videoQuestionAnswer.child("text").val() ));
+
+                            });
+                        }); 
+                    }
+
+                });
+
+                // put the tiles in order
+                orderTiles();
+
+                // add the html for each tile
+                if (viewing == true) {
+                    document.getElementById("afterTilesDiv").innerHTML = "<button id='gotItButton' class='customButton' onclick='gotItFunction()'> Start </button>";
+                    addTileViewHtml2();
+                }
+                else {
+                    document.getElementById("afterTilesDiv").innerHTML = '' +
+                        '<button id="saveButton" class="customButton" style="width:150px; margin-top:10px;">Save (Auto)</button>' +
+                        '<button id="refreshButton" class="customButton" style="width:150px; margin-top:10px;">Refresh</button>' +
+                        '<button id="newTileButton" onClick="addTile()" class="customButton" style="width:150px; margin-top:10px;">Add Tile</button>';
+                    addTileEditHtml();
+                }
+            });
+        }
+        function orderTiles() {
+            // *need to do this differently
+            /*
+            tiles = [tilesUnordered.length];
+            var i = 0;
+            tilesUnordered.forEach(function (tile) {
+                tiles[i] = tilesUnordered[i];
+                i++;
+            });
+            */
+            // now sort tiles
+            for (var j = 0; j < tiles.length; j++) {
+                for (var i = 0; i < tiles.length-1; i++) {
+                    if (tiles[i].position > tiles[i + 1].position) {
+                        // if i is bigger move i to i+1
+                        var tempTile = new Tile(tiles[i].id, tiles[i].type, tiles[i].position, tiles[i].content);
+                        tiles[i].answers.forEach(function (answer) { tempTile.answers.push(answer); });
+                        tiles[i] = tiles[i + 1];
+                        tiles[i + 1] = tempTile;
+                    }
+                }
+            }
+
+
+            /*
+            tilesUnordered.forEach(function (tile) {
+                tiles[tile.position] = tile;
+
+            });
+            */
+        }
+        $("#newTileButton").click(function () {
+            console.log("clicked new Tile");    
+            // first make in firebase with position of tiles.length, save they key, use it when adding to tiles array
+            console.log("class:" + currentClassId + " module:" + currentModuleId);
+            var tRef = firebase.database().ref().child("structA/classes/" + currentClassId + "/modules/" + currentModuleId + "/tiles")
+            var key = tRef.push().key;
+            tRef.child(key).set({
+                type: "text",
+                position: parseInt(tiles[tiles.length - 1].position) + 1,
+                content:"put content here"
+            });
+            if (verbose == true)
+                console.log("pushed " + key+" tile");
+            //tiles.push(new Tile(key, "text", tiles.length, "put content here"));
+            //orderTiles();
+            //addTileEditHtml();
+            loadModuleTiles();
+
+        });
+        function addTile() {
+            console.log("clicked add Tile");    
+            // first make in firebase with position of tiles.length, save they key, use it when adding to tiles array
+            console.log("class:" + currentClassId + " module:" + currentModuleId);
+            var tRef = firebase.database().ref().child("structA/classes/" + currentClassId + "/modules/" + currentModuleId + "/tiles")
+            var key = tRef.push().key;
+            tRef.child(key).set({
+                type: "text",
+                position: parseInt(tiles[tiles.length - 1].position) + 2,
+                content:"put content here"
+            });
+            //if (tiles.length > 0) {
+            //    tRef.update({position: parseInt(tiles[tiles.length - 1].position) + 1});
+            //}
+            if (verbose == true)
+                console.log("pushed " + key+" tile");
+            //tiles.push(new Tile(key, "text", tiles.length, "put content here"));
+            //orderTiles();
+            //addTileEditHtml();
+            loadModuleTiles();
+
+        }
+        function addTileAtPosition(position) {
+            console.log("clicked add Tile");    
+            // first make in firebase with position of tiles.length, save they key, use it when adding to tiles array
+            console.log("class:" + currentClassId + " module:" + currentModuleId);
+            var tRef = firebase.database().ref().child("structA/classes/" + currentClassId + "/modules/" + currentModuleId + "/tiles")
+            var key = tRef.push().key;
+            tRef.child(key).set({
+                type: "text",
+                position: parseFloat(position),
+                content:"put content here"
+            });
+            //if (tiles.length > 0) {
+            //    tRef.update({position: parseInt(position)});
+            //}
+            if (verbose == true)
+                console.log("pushed " + key+" tile");
+            //tiles.push(new Tile(key, "text", tiles.length, "put content here"));
+            //orderTiles();
+            //addTileEditHtml();
+            loadModuleTiles();
+
+        }
+        function addVideoQuestion(tileId) {
+            var tRef = firebase.database().ref().child("structA/classes/" + currentClassId + "/modules/" + currentModuleId + "/tiles/" + tileId);
+            var key = tRef.child("videoQuestions").push().key;
+            tRef.child("videoQuestions").child(key).set({
+                type: "text",
+                position: parseInt(tiles[tiles.length - 1].position) + 1,
+                content: "put content here",
+                answers: {
+                    0: "true",
+                    1: "false"
+                }
+            })
+            // add question html to innerHTML of "tileDiv"+tileID in the section wher you add the main html
+            refresh();
+        }
+        $("#saveButton").click(function () {
+            /*
+            var tilesRef = firebase.database().ref().child("structA/classes/" + currentClassId + "/modules/" + currentModuleId + "/tiles");
+            if (tiles.length != 0) {
+                tiles.forEach(function (tile) {
+                    // if the id is none push it to the tiles list, otherwise use update
+                    if (tile.id == "none") {
+                        var key = tilesRef.push().key;
+                        tilesRef.child(key).set({
+                            type: tile.type,
+                            content: tile.content,
+                            position: tile.position
+                        });
+                    }
+                    else {
+                        tilesRef.child(tile.id).update({
+                            type: tile.type,
+                            position: tile.position,
+                            content: "updated"
+                        });
+                    }
+                });
+
+            }
+            */
+        });
+        function updateTileText(id) {
+            /*
+             make the id of the textarea "textArea + tile.id"
+             put id into the updateTileFunction to get the ref and also text from textArea
+
+             */
+            // update in the array 
+            // update in firebase
+            if (verbose == true)
+                console.log("typed");
+            var updatedText = document.getElementById("textArea" + id).value;
+            tileRef = firebase.database().ref().child("structA/classes/" + currentClassId + "/modules/" + currentModuleId + "/tiles/" + id);
+            tileRef.update({
+                content: updatedText
+            });
+        }
+        function updateTileTextForVideo(id) {
+            /*
+             make the id of the textarea "textArea + tile.id"
+             put id into the updateTileFunction to get the ref and also text from textArea
+
+             */
+            // update in the array 
+            // update in firebase
+            if (verbose == true)
+                console.log("typed");
+            var updatedText = document.getElementById("textArea" + id).value;
+
+            if (verbose == true)
+                console.log("!includes('embed') = " + !updatedText.includes("embed"))
+
+            if (!updatedText.includes("embed"))
+                updatedText = updatedText.replace("youtube.com/watch?v=", "youtube.com/embed/"); 
+
+            tileRef = firebase.database().ref().child("structA/classes/" + currentClassId + "/modules/" + currentModuleId + "/tiles/" + id);
+            tileRef.update({
+                content: updatedText
+            });
+        }
+        function updateAnswerText(tileId, answerId) {
+            /*
+             make the id of the textarea "textArea + tile.id"
+             put id into the updateTileFunction to get the ref and also text from textArea
+
+             */
+            // update in the array 
+            // update in firebase
+            if (verbose == true)
+                console.log("typed");
+            var updatedText = document.getElementById("answer" + tileId + answerId).value;
+            tileRef = firebase.database().ref().child("structA/classes/" + currentClassId + "/modules/" + currentModuleId + "/tiles/" + tileId + "/answers");
+            var updatedAnswerText = {};
+            updatedAnswerText["text"] = updatedText;
+            tileRef.child(answerId).update(updatedAnswerText);
+        }
+        function updatePosition(id) {
+            if (verbose == true)
+                console.log("position update");
+            var updatedPosition = document.getElementById("positionInput" + id).value;
+            tileRef = firebase.database().ref().child("structA/classes/" + currentClassId + "/modules/" + currentModuleId + "/tiles/" + id);
+            tileRef.update({
+                position: updatedPosition
+            });
+            loadModuleTiles();
+        }
+        function setType(id, type) {
+            if (type == "question")
+                document.getElementById("typeSelector" + id).selectedIndex = 2;
+            document.getElementById("typeSelector" + id).selectedIndex = "3";
+
+            // set the numbner in the index based on the id
+            if (verbose == true)
+                console.log("type update");
+            
+            tileRef = firebase.database().ref().child("structA/classes/" + currentClassId + "/modules/" + currentModuleId + "/tiles/" + id);
+            if (type == "question") {
+                tileRef.update({
+                    type: type,
+                    answers: {
+                        0: {text:"true", correct:true},
+                        1: {text: "false", correct:false}
+                    }
+                });
+            }else if (type == "video") {
+                tileRef.update({
+                    type: type//,
+                    //videoQuestions: "exists"
+                });
+            }
+            else {
+                tileRef.update({
+                    type: type
+                });
+            }
+            loadModuleTiles();
+        }
+        $("#refreshButton").click(function () {
+            loadModuleTiles();
+        });
+        function moveTile(up) {
+            if (up == true) {
+
+            } else {
+
+            }
+        }
+        function refresh() {
+            loadModuleTiles();
+        }
+        function deleteTile(id) {
+            var tRef = firebase.database().ref().child("structA/classes/" + currentClassId + "/modules/" + currentModuleId + "/tiles");
+            tRef.child(id).remove();
+            loadModuleTiles();
+        }
+        function addAnswer(tileId) {
+            var tRef = firebase.database().ref().child("structA/classes/" + currentClassId + "/modules/" + currentModuleId + "/tiles/" + tileId);
+            var key = tRef.child("answers").push().key;
+            var newAnswer = {};
+            //newAnswer[key] = "an answer choice";
+            tRef.child("answers").child(key).update({text:"an answer choice", correct:false});
+            loadModuleTiles();
+        }
+        function deleteAnswer(tileId, answerId) {
+            var aRef = firebase.database().ref().child("structA/classes/" + currentClassId + "/modules/" + currentModuleId + "/tiles/" + tileId + "/answers/" + answerId);
+            aRef.remove();
+            loadModuleTiles();
+        }
+        class Tile {
+
+            //constructor(type) {
+            //    this.type = type;
+            //}
+            
+            constructor(id, type, position, content) {
+                this.id = id;
+                this.type = type;
+                this.position = position;
+                this.content = content;
+                this.answers = [];
+                this.videoQuestions = [];
+            }
+            setType(type) {
+                this.type = type;
+            }
+            setPosition(position) {
+                this.position = position;
+            }
+            setContent(content) {
+                this.content = content;
+            }
+            
+
+
+        }
+        class VideoQuestionTile {
+
+            //constructor(type) {
+            //    this.type = type;
+            //}
+            
+            constructor(id, position, content) {
+                this.id = id;
+                this.position = position;
+                this.content = content;
+                this.answers = [];
+            }
+            setPosition(position) {
+                this.position = position;
+            }
+            setContent(content) {
+                this.content = content;
+            }           
+        }
+        class Answer {
+            constructor (firebaseKey, answerContent, correct){
+                this.firebaseKey = firebaseKey;
+                this.answerContent = answerContent;
+                this.correct = correct;
+            }
+        }
+    </script>
+</body>
+</html>
