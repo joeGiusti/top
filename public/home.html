@@ -1,4 +1,4 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="en">
 <head>
     <!-- Required meta tags -->
@@ -288,11 +288,8 @@
             </div>
         </div>
     </div>
-    
-    
-     
     <!-- module view content -->
-    <div id="modulViewDiv" class="midHolder" style="display:none; height:100%; ">
+    <div id="modulViewDiv" class="midHolder" style="display:none; height:100%; background-image: url(../images/Chest.jpg);">
         <div class="mid">
             <h1 id="moduleName" class="text-center">Modules Name</h1>
             <div id="moduleTilesPlaceholder">~ module tiles will show here ~</div>
@@ -394,7 +391,7 @@
             var dbRef = firebase.database().ref().child("structA");
             var key = dbRef.child("classes").push().key;
             dbRef.child("classes").child(key).set({
-                imageUrl: "images/Chest.jpg",
+                imageUrl: "images/chest.jpg",
                 name: className,
                 description: classDescription,
                 exists: true
@@ -619,7 +616,7 @@
             modulesRef.child(key).set({
                 name: newName,
                 description: newDescription,
-                imageUrl: "images/Chest.jpg",
+                imageUrl: "images/chest.jpg",
                 tiles: {
                     idOne: {
                         type:"text",
@@ -794,7 +791,6 @@
                         "<hr style='color:white; background-color:white;'/>" +
                         "<p style='color:white; font-weight:bold; margin-left:20px;  font-size:20px; margin-top:15px;'> Answer Choices </p>" +
                         "</div>";
-
                         videoQuestion.answers.forEach(function (answer) {
                             // could make a struct with id and content for each answer, then make an array of those in the tile class
                             newHtml += "<textarea id='answer" + tile.id + videoQuestion.id.answer.firebaseKey + "' onChange='updateAnswerText(\"" + tile.id + "\",\"" + answer.firebaseKey + "\")' style='height:auto; width:80%;'>" + answer.answerContent + "</textarea>";
@@ -1183,7 +1179,6 @@
             /*
             tilesUnordered.forEach(function (tile) {
                 tiles[tile.position] = tile;
-
             });
             */
         }
@@ -1287,7 +1282,6 @@
                         });
                     }
                 });
-
             }
             */
         });
@@ -1295,7 +1289,6 @@
             /*
              make the id of the textarea "textArea + tile.id"
              put id into the updateTileFunction to get the ref and also text from textArea
-
              */
             // update in the array 
             // update in firebase
@@ -1311,7 +1304,6 @@
             /*
              make the id of the textarea "textArea + tile.id"
              put id into the updateTileFunction to get the ref and also text from textArea
-
              */
             // update in the array 
             // update in firebase
@@ -1334,7 +1326,6 @@
             /*
              make the id of the textarea "textArea + tile.id"
              put id into the updateTileFunction to get the ref and also text from textArea
-
              */
             // update in the array 
             // update in firebase
