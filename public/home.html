@@ -290,7 +290,7 @@
     </div>
     
     
-    <div id="backgroundDiv" class="position:fixed; z-index:-10; midHolder" style="height:100%; background-color:green; background-image: url(images/Chest.jpg);">
+    <div id="backgroundDiv" style="position:fixed; z-index:-10; midHolder" style="height:100%; background-color:green; background-image: url(images/Chest.jpg);">
      
     <!-- module view content -->
     <div id="modulViewDiv" class="midHolder" style="display:none; height:100%; ">
@@ -395,7 +395,7 @@
             var dbRef = firebase.database().ref().child("structA");
             var key = dbRef.child("classes").push().key;
             dbRef.child("classes").child(key).set({
-                imageUrl: "images/chest.jpg",
+                imageUrl: "images/Chest.jpg",
                 name: className,
                 description: classDescription,
                 exists: true
