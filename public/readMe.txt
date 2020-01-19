@@ -1,3 +1,10 @@
+========== ========== ========== ========== ========== ========== ========== ==========
+            This section contains random notes and ideas about htis project
+========== ========== ========== ========== ========== ========== ========== ==========
+
+When sending the real estate course to the frec to be approved have a comments section agfter each question so they can write exactly what they think ando if anythin needs to be changed
+
+
 Shout into the void with such intensity that your echoes are felt by postarity;
 
 sigin info
